@@ -8,8 +8,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   bool comingFromSignUp = false; // to check if screen can be popped to previous
+  bool showPass = true;
+  String eyeIconName = "";
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +26,15 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: const [
                 BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5,
-                  spreadRadius: 1,
-                  offset: Offset(5, 5)
-                ),
+                    color: Colors.grey,
+                    blurRadius: 5,
+                    spreadRadius: 1,
+                    offset: Offset(5, 5)),
                 BoxShadow(
-                  color: Color.fromARGB(255, 241, 240, 240),
-                  blurRadius: 5,
-                  spreadRadius: 1,
-                  offset: Offset(-5, -5)
-                ),
+                    color: Color.fromARGB(255, 241, 240, 240),
+                    blurRadius: 5,
+                    spreadRadius: 1,
+                    offset: Offset(-5, -5)),
               ],
             ),
             child: Column(mainAxisAlignment: MainAxisAlignment.center,
@@ -110,11 +109,18 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(15)),
                       child: TextField(
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(8),
+                          contentPadding: EdgeInsets.only(top: 15, left: 8),
                           border: InputBorder.none,
                           hintText: "Password",
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              _passViewChange();
+                              debugPrint("eye clicked");
+                            },
+                            icon: Icon(Icons.remove_red_eye_rounded),
+                          ),
                         ),
-                        obscureText: true,
+                        obscureText: showPass,
                       ),
                     ),
                   ),
@@ -185,5 +191,11 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _passViewChange() {
+    setState(() {
+      showPass = !showPass;
+    });
   }
 }
