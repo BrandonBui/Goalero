@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,6 +12,23 @@ class _LoginPageState extends State<LoginPage> {
   bool comingFromSignUp = false; // to check if screen can be popped to previous
   bool passwordHidden = true;
   String eyeIconName = "";
+
+  // text controllers
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim());
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           borderRadius: BorderRadius.circular(15)),
                       child: TextField(
+                        controller: _emailController,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(8),
                           border: InputBorder.none,
@@ -108,6 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           borderRadius: BorderRadius.circular(15)),
                       child: TextField(
+                        controller: _passwordController,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(top: 15, left: 8),
                           border: InputBorder.none,
@@ -137,6 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: GestureDetector(
                       onTap: () {
                         debugPrint("Login Clicked");
+                        signIn();
                       },
                       child: Container(
                         padding: EdgeInsets.all(15),

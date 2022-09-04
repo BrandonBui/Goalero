@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:goalero/main_page.dart';
 
 import "./login_page.dart";
 import "./signup_page.dart";
@@ -21,12 +22,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: "/landingPage",
-      routes: {
-        "/landingPage": (context) => const LandingPage(),
-        "/loginPage": (context) => LoginPage(),
-        "/signupPage": (context) => SignupPage(),
-      },
+      home: MainPage(),
+
+      //initialRoute: "/landingPage",
+      //routes: {
+      //  "/landingPage": (context) => const LandingPage(),
+      //  "/loginPage": (context) => LoginPage(),
+      //  "/signupPage": (context) => SignupPage(),
+      //},
     );
   }
 }
