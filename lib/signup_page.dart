@@ -8,6 +8,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  bool passwordHidden = true;
+  String eyeIconName = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,11 +133,17 @@ class _SignupPageState extends State<SignupPage> {
                             borderRadius: BorderRadius.circular(15)),
                         child: TextField(
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(8),
-                            border: InputBorder.none,
-                            hintText: "Password",
-                          ),
-                          obscureText: true,
+                              contentPadding: EdgeInsets.all(8),
+                              border: InputBorder.none,
+                              hintText: "Password",
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  _passViewChange();
+                                  debugPrint("eye icon clicked");
+                                },
+                                icon: Icon(Icons.remove_red_eye_rounded),
+                              )),
+                          obscureText: passwordHidden,
                         ),
                       ),
                     ),
@@ -206,5 +215,11 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
+  }
+
+  void _passViewChange() {
+    setState(() {
+      passwordHidden = !passwordHidden;
+    });
   }
 }
