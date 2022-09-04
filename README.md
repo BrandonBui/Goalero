@@ -4,7 +4,7 @@
 
 When you clone this repo into VS Code, VS Code will ask you if you would like to update/intall packages. You NEED to do that!!!
 
-A new Flutter project.
+Contributors: Shayaz Pithawalla, Brandon Bui, and Disha Mahajan
 
 ## Getting Started
 
