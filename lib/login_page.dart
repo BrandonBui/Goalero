@@ -9,7 +9,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool comingFromSignUp = false; // to check if screen can be popped to previous
-  bool showPass = true;
+  bool passwordHidden = true;
   String eyeIconName = "";
 
   @override
@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                             icon: Icon(Icons.remove_red_eye_rounded),
                           ),
                         ),
-                        obscureText: showPass,
+                        obscureText: passwordHidden,
                       ),
                     ),
                   ),
@@ -195,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _passViewChange() {
     setState(() {
-      showPass = !showPass;
+      passwordHidden = !passwordHidden;
     });
   }
 }
