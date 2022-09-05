@@ -152,6 +152,37 @@ class _SignupPageState extends State<SignupPage> {
                       height: 10,
                     ),
 
+                    //Confirm pass textfield
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFFF3F6F8),
+                            border: Border.all(
+                              color: Color(0xFFD9E0E6),
+                            ),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: TextField(
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(8),
+                              border: InputBorder.none,
+                              hintText: "Confirm Password",
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  _passViewChange();
+                                  debugPrint("eye icon clicked");
+                                },
+                                icon: Icon(Icons.remove_red_eye_rounded),
+                              )),
+                          obscureText: passwordHidden,
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
                     //Sign In button
                     Padding(
                       padding: const EdgeInsets.symmetric(

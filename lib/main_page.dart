@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goalero/login_page.dart';
 import 'package:goalero/logo_loading.dart';
+import 'package:goalero/temp_home.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class MainPage extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const LogoLoading();
+              return TempHome();
             } else {
               return LoginPage();
             }
