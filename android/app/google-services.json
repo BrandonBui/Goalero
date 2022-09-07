@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "835712352486",
+    "project_id": "goalero-42069",
+    "storage_bucket": "goalero-42069.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835712352486:android:32bd16e36279a79980fb27",
+        "android_client_info": {
+          "package_name": "com.example.goalero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835712352486-1cfs6glesgp88rq8t81d7ksqf5s3g4su.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZPbQe9IxoquMlJmDgE0F74w_LYBzNjEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835712352486-1cfs6glesgp88rq8t81d7ksqf5s3g4su.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "835712352486-k0fm7kqmfs1ehl3dm2as70q3dc30rtj9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.goalero"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
@@ -11,6 +12,35 @@ class _SignupPageState extends State<SignupPage> {
   bool passwordHidden = true;
   String eyeIconName = "";
 
+  //text controllers
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  Future signUp() async {
+    if (passwordConfirmed())
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+  }
+
+  bool passwordConfirmed() {
+    if (_passwordController.text.trim() ==
+        _confirmPasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +48,7 @@ class _SignupPageState extends State<SignupPage> {
       body: SafeArea(
         child: Center(
           child: Container(
-            height: 570,
+            height: 590,
             margin: EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -84,6 +114,7 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             borderRadius: BorderRadius.circular(15)),
                         child: TextField(
+                          controller: _nameController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(8),
                             border: InputBorder.none,
@@ -108,6 +139,7 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             borderRadius: BorderRadius.circular(15)),
                         child: TextField(
+                          controller: _emailController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(8),
                             border: InputBorder.none,
@@ -121,7 +153,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 10,
                     ),
 
-                    //Pass textfield
+                    //Password textfield
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
@@ -132,6 +164,8 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             borderRadius: BorderRadius.circular(15)),
                         child: TextField(
+                          controller: _passwordController,
+                          obscureText: passwordHidden,
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(8),
                               border: InputBorder.none,
@@ -143,7 +177,6 @@ class _SignupPageState extends State<SignupPage> {
                                 },
                                 icon: Icon(Icons.remove_red_eye_rounded),
                               )),
-                          obscureText: passwordHidden,
                         ),
                       ),
                     ),
@@ -152,7 +185,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 10,
                     ),
 
-                    //Confirm pass textfield
+                    //Confirm password textfield
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
@@ -163,6 +196,8 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             borderRadius: BorderRadius.circular(15)),
                         child: TextField(
+                          obscureText: passwordHidden,
+                          controller: _confirmPasswordController,
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(8),
                               border: InputBorder.none,
@@ -174,7 +209,6 @@ class _SignupPageState extends State<SignupPage> {
                                 },
                                 icon: Icon(Icons.remove_red_eye_rounded),
                               )),
-                          obscureText: passwordHidden,
                         ),
                       ),
                     ),
@@ -191,6 +225,7 @@ class _SignupPageState extends State<SignupPage> {
                       child: GestureDetector(
                         onTap: () {
                           debugPrint("Login Clicked");
+                          signUp();
                         },
                         child: Container(
                           padding: EdgeInsets.all(15),

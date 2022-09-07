@@ -22,14 +22,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
-
-      //initialRoute: "/landingPage",
-      //routes: {
-      //  "/landingPage": (context) => const LandingPage(),
-      //  "/loginPage": (context) => LoginPage(),
-      //  "/signupPage": (context) => SignupPage(),
-      //},
+      // home: MainPage(),
+      initialRoute: "/landingPage",
+      routes: {
+        "/landingPage": (context) => const LandingPage(),
+        "/loginPage": (context) => LoginPage(),
+        "/signupPage": (context) => SignupPage(),
+      },
     );
   }
 }
