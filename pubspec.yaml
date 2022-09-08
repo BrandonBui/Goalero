@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^3.0.1
   firebase_auth: ^3.7.0
   cloud_firestore: ^3.4.6
+  email_validator: '2.1.16'
   
 
 dev_dependencies:

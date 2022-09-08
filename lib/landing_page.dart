@@ -59,7 +59,7 @@ class LandingPage extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         debugPrint('I was tapped!');
-                        Navigator.pushNamed(context, "/loginPage");
+                        Navigator.pushNamed(context, "/MainPage");
                       },
                       child: Container(
                         height: 55,

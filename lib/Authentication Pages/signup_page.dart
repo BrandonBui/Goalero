@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignupPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -12,6 +13,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final formKey = GlobalKey<FormState>();
   bool passwordHidden = true;
   String eyeIconName = "";
 
@@ -49,6 +51,7 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       backgroundColor: Color(0xFFF3F6F8),
       body: SafeArea(
+        key: formKey,
         child: Center(
           child: Container(
             height: 590,
@@ -106,7 +109,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 20,
                     ),
 
-                    //Name textfield
+                    //##### Name textfield #####
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
@@ -116,13 +119,20 @@ class _SignupPageState extends State<SignupPage> {
                               color: Color(0xFFD9E0E6),
                             ),
                             borderRadius: BorderRadius.circular(15)),
-                        child: TextField(
+                        child: TextFormField(
                           controller: _nameController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(8),
                             border: InputBorder.none,
                             hintText: "Name",
                           ),
+                          validator: (value) {
+                            if (value == null) {
+                              return "Please enter your name.";
+                            } else {
+                              return null; //name is valid/there is a name
+                            }
+                          },
                         ),
                       ),
                     ),
@@ -131,7 +141,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 10,
                     ),
 
-                    //Email textfield
+                    //##### Email textfield #####
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
@@ -141,13 +151,17 @@ class _SignupPageState extends State<SignupPage> {
                               color: Color(0xFFD9E0E6),
                             ),
                             borderRadius: BorderRadius.circular(15)),
-                        child: TextField(
+                        child: TextFormField(
                           controller: _emailController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(8),
                             border: InputBorder.none,
                             hintText: "Email",
                           ),
+                          validator: (email) =>
+                              email != null && !EmailValidator.validate(email)
+                                  ? "Enter a valid email"
+                                  : null,
                         ),
                       ),
                     ),
@@ -156,7 +170,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 10,
                     ),
 
-                    //Password textfield
+                    //##### Password textfield #####
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
@@ -188,7 +202,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 10,
                     ),
 
-                    //Confirm password textfield
+                    //##### Confirm password textfield #####
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
@@ -220,7 +234,7 @@ class _SignupPageState extends State<SignupPage> {
                       height: 10,
                     ),
 
-                    //Sign In button
+                    //##### Sign In button #####
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 25,
@@ -228,7 +242,11 @@ class _SignupPageState extends State<SignupPage> {
                       child: GestureDetector(
                         onTap: () {
                           debugPrint("Login Clicked");
-                          signUp();
+                          final isValidForm = formKey.currentState!.validate();
+
+                          if (isValidForm) {
+                            signUp();
+                          }
                         },
                         child: Container(
                           padding: EdgeInsets.all(15),
