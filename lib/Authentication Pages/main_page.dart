@@ -10,7 +10,7 @@ class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { //check if user is logged in or not 
     return Scaffold(
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),

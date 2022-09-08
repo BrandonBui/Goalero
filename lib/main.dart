@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:goalero/dashboard.dart';
 import 'package:goalero/Authentication%20Pages/main_page.dart';
+import 'package:goalero/reset_password_page.dart';
 
 import 'Authentication Pages/login_page.dart';
 import 'Authentication Pages/signup_page.dart';
