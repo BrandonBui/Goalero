@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:goalero/reset_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showSignupPage;
@@ -148,6 +149,32 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
+                  //forgot password
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ResetPassword();
+                              }));
+                            },
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
                   SizedBox(
                     height: 10,
                   ),
