@@ -44,6 +44,9 @@ class _SignupPageState extends State<SignupPage> {
         _confirmPasswordController.text.trim()) {
       return true;
     } else {
+      setState(() {
+        errorMessage = "Passwords do not match";
+      });
       return false;
     }
   }
