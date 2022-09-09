@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  int _currentIndex = 2;
+  int _currentIndex = 0;
 
   PageController _pageController = PageController(initialPage: 0);
 
@@ -88,15 +88,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
         label: 'Chat'),
     const BottomNavigationBarItem(
-        icon: Icon(
-          Icons.add_circle_outline_rounded,
-          color: Colors.black,
-        ),
-        label: 'Add Goal'),
-    const BottomNavigationBarItem(
-        icon: Icon(
-          Icons.trending_up_rounded,
-          color: Colors.black,
+        icon: Padding(
+          padding: EdgeInsets.only(),
+          child: Icon(
+            Icons.trending_up_rounded,
+            color: Colors.black,
+          ),
         ),
         label: 'Trending'),
     const BottomNavigationBarItem(
@@ -110,27 +107,30 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: RotationTransition(       //floating action button
-      //   turns: animation,
-      //   child: RotationTransition(
-      //     turns: AlwaysStoppedAnimation(45 / 360),
-      //     child: FloatingActionButton(
-      //       shape: const RoundedRectangleBorder(
-      //         borderRadius: BorderRadius.all(
-      //           Radius.circular(15),
-      //         ),
-      //       ),
-      //       onPressed: () {},
-      //       tooltip: "Add Goal",
-      //       elevation: 4.0,
-      //       backgroundColor: Colors.black,
-      //       child: RotationTransition(
-      //         turns: AlwaysStoppedAnimation(-45 / 360),
-      //         child: const Icon(Icons.add_circle_outline_rounded),
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      floatingActionButton: RotationTransition(
+        //floating action button
+        turns: animation,
+        child: RotationTransition(
+          turns: AlwaysStoppedAnimation(45 / 360),
+          child: FloatingActionButton(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(15),
+              ),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, "/addGoal");
+            },
+            tooltip: "Add Goal",
+            elevation: 4.0,
+            backgroundColor: Colors.black,
+            child: RotationTransition(
+              turns: AlwaysStoppedAnimation(-45 / 360),
+              child: const Icon(Icons.add_circle_outline_rounded),
+            ),
+          ),
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       extendBody: true,
       body: PageView(
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         children: const [
           home(),
           chat(),
-          addGoal(),
+          //addGoal(),
           trendingGoals(),
           profile(),
         ],
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         padding: const EdgeInsets.all(10.0),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(200),
             boxShadow: const [
               BoxShadow(
                   color: Color(0XFF3F826D),
@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ],
           ),
           child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(200)),
             child: BottomNavigationBar(
               backgroundColor: Colors.white,
               items: _bottomNavBarItems,
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               onTap: (index) {
                 setState(() {
                   _pageController.animateToPage(index,
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 250),
                       curve: Curves.easeIn);
                 });
               },
