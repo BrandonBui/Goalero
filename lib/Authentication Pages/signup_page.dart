@@ -25,7 +25,7 @@ class _SignupPageState extends State<SignupPage> {
   final _confirmPasswordController = TextEditingController();
 
   Future signUp() async {
-    if (passwordConfirmed()) {
+    if (passwordConfirmed() && passwordComplexity()) {
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: _emailController.text.trim(),
@@ -51,6 +51,21 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
+  bool passwordComplexity() {
+    //Regex checks that password has at least 1 digit, and 1 special character,
+    //and that it is at least 12 characters.
+    RegExp regex = RegExp(r'^(?=.*?[0-9])(?=.*?[!@#\$&*~?-]).{12,}$');
+
+    //If the password does not meet the requirements then the error message gets
+    //set below and false is returned.
+    if (!regex.hasMatch(_passwordController.text.trim())) {
+      errorMessage = "Please enter a password that meets the reuirements above";
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -68,7 +83,7 @@ class _SignupPageState extends State<SignupPage> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Center(
               child: Container(
-                height: 590,
+                height: 720,
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -90,6 +105,10 @@ class _SignupPageState extends State<SignupPage> {
                   child: Column(mainAxisAlignment: MainAxisAlignment.center,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
+                        //Spacing above Greeting text
+                        const SizedBox(
+                          height: 10,
+                        ),
                         //Greeting
                         const Text(
                           "Looks Like You're New!",
@@ -98,6 +117,7 @@ class _SignupPageState extends State<SignupPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        //Spacing between greeting lines
                         const SizedBox(
                           height: 10,
                         ),
@@ -199,7 +219,8 @@ class _SignupPageState extends State<SignupPage> {
                               controller: _passwordController,
                               obscureText: passwordHidden,
                               decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(8),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(8, 13, 8, 8),
                                   border: InputBorder.none,
                                   hintText: "Password",
                                   suffixIcon: IconButton(
@@ -231,7 +252,8 @@ class _SignupPageState extends State<SignupPage> {
                               obscureText: passwordHidden,
                               controller: _confirmPasswordController,
                               decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(8),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(8, 13, 8, 8),
                                   border: InputBorder.none,
                                   hintText: "Confirm Password",
                                   suffixIcon: IconButton(
@@ -249,10 +271,33 @@ class _SignupPageState extends State<SignupPage> {
                           height: 10,
                         ),
 
-                        Text(
-                          errorMessage,
-                          style: TextStyle(color: Colors.red),
-                          textAlign: TextAlign.center,
+                        //#### Password Requirements #####
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Text(
+                            // ignore: prefer_adjacent_string_concatenation
+                            // ignore: prefer_interpolation_to_compose_strings
+                            "Password requirements:                          " +
+                                "        " +
+                                "\n    -At least 12 characters" +
+                                "\n    -At least 1 number" +
+                                "\n    -At least 1 special character (!@#\$&*~?-)",
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+
+                        //Signup error messages
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: Text(
+                            errorMessage,
+                            style: TextStyle(color: Colors.red),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
 
                         SizedBox(
