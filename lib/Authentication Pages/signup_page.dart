@@ -32,7 +32,9 @@ class _SignupPageState extends State<SignupPage> {
             password: _passwordController.text.trim());
         errorMessage = "";
       } on FirebaseAuthException catch (error) {
-        errorMessage = error.message!;
+        setState(() {
+          errorMessage = error.message!;
+        });
       }
     }
   }
@@ -116,17 +118,7 @@ class _SignupPageState extends State<SignupPage> {
                                 Image.asset("images/Goalero Logo No BG.png")),
 
                         SizedBox(
-                          height: 10,
-                        ),
-
-                        //Error messager
-                        Text(
-                          errorMessage,
-                          style: TextStyle(color: Colors.red),
-                        ),
-
-                        SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
 
                         //##### Name textfield #####
@@ -254,6 +246,16 @@ class _SignupPageState extends State<SignupPage> {
                           height: 10,
                         ),
 
+                        Text(
+                          errorMessage,
+                          style: TextStyle(color: Colors.red),
+                          textAlign: TextAlign.center,
+                        ),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+
                         //##### Sign un button #####
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -266,7 +268,9 @@ class _SignupPageState extends State<SignupPage> {
                                   formKey.currentState!.validate();
 
                               if (isValidForm) {
-                                signUp();
+                                setState(() {
+                                  signUp();
+                                });
                               }
                             },
                             child: Container(
