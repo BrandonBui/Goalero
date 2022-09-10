@@ -102,7 +102,8 @@ class _SignupPageState extends State<SignupPage> {
                   ],
                 ),
                 child: SingleChildScrollView(
-                  child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         //Spacing above Greeting text
@@ -144,31 +145,63 @@ class _SignupPageState extends State<SignupPage> {
                           height: 20,
                         ),
 
-                        //##### Name textfield #####
+                        //##### First ans last name textfield #####
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color(0xFFF3F6F8),
-                                border: Border.all(
-                                  color: Color(0xFFD9E0E6),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFFF3F6F8),
+                                      border: Border.all(
+                                        color: Color(0xFFD9E0E6),
+                                      ),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(8),
+                                      border: InputBorder.none,
+                                      hintText: "First Name",
+                                    ),
+                                    validator: (value) {
+                                      if (value == "") {
+                                        return "Please enter your first name.";
+                                      } else {
+                                        return null; //name is valid/there is a name
+                                      }
+                                    },
+                                  ),
                                 ),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: TextFormField(
-                              controller: _nameController,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(8),
-                                border: InputBorder.none,
-                                hintText: "Name",
                               ),
-                              validator: (value) {
-                                if (value == "") {
-                                  return "Please enter your name.";
-                                } else {
-                                  return null; //name is valid/there is a name
-                                }
-                              },
-                            ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFFF3F6F8),
+                                      border: Border.all(
+                                        color: Color(0xFFD9E0E6),
+                                      ),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(8),
+                                      border: InputBorder.none,
+                                      hintText: "Last Name",
+                                    ),
+                                    validator: (value) {
+                                      if (value == "") {
+                                        return "Please enter your last name.";
+                                      } else {
+                                        return null; //name is valid/there is a name
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
 
