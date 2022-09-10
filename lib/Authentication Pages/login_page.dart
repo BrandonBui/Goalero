@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goalero/reset_password_page.dart';
+import 'package:goalero/Authentication%20Pages/reset_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showSignupPage;
