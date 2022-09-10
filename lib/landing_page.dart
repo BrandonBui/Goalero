@@ -62,7 +62,7 @@ class LandingPage extends StatelessWidget {
                         Navigator.pushNamed(context, "/MainPage");
                       },
                       child: Container(
-                        height: 55,
+                        height: 65,
                         //style: EevatedButton.styleFrom(primary: const Color.fromARGB(255, 136, 95, 241), shadowColor: const Color.fromARGB(255, 120, 119, 119),elevation: 10, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
                         padding: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
