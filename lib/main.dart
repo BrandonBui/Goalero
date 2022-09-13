@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:goalero/Authentication%20Pages/main_page2.dart';
 import 'package:goalero/NavBarPages/add_goal_page.dart';
 import 'package:goalero/NavBarPages/chat_page.dart';
 import 'package:goalero/NavBarPages/trending_goals.dart';
@@ -31,12 +32,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(textTheme: GoogleFonts.quicksandTextTheme()),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/landingPage",
+      initialRoute: "/MainPage2",
       routes: {
         "/landingPage": (context) => const LandingPage(),
         "/dashboardPage": (context) => DashboardPage(),
         "/MainPage": (context) => MainPage(),
         "/addGoal": (context) => addGoal(),
+        "/MainPage2": (context) => MainPage2(),
       },
     );
   }

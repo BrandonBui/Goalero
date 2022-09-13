@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goalero/reset_password_page.dart';
+import 'package:goalero/Authentication%20Pages/reset_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showSignupPage;
@@ -16,15 +16,33 @@ class _LoginPageState extends State<LoginPage> {
   bool comingFromSignUp = false; // to check if screen can be popped to previous
   bool passwordHidden = true;
   String eyeIconName = "";
+  String errorMessage = "";
 
   // text controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim());
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+    } on FirebaseAuthException catch (error) {
+      if (error.code == 'user-not-found') {
+        setState(() {
+          errorMessage = "No user found for that email.";
+        });
+      } else if (error.code == 'wrong-password' ||
+          error.code == "invalid-email") {
+        setState(() {
+          errorMessage = "Incorrect email or password";
+        });
+      } else if (error.code == "user-disabled") {
+        setState(() {
+          errorMessage = "This account has been disabled";
+        });
+      }
+    }
   }
 
   @override
@@ -41,8 +59,9 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: Center(
           child: Container(
-            height: 500,
+            height: 580,
             margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.only(top: 20.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
@@ -60,7 +79,8 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             child: SingleChildScrollView(
-              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     //Greeting
@@ -152,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
             
                     //forgot password
                     SizedBox(
-                      height: 10.0,
+                      height: 20.0,
                     ),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -178,6 +198,13 @@ class _LoginPageState extends State<LoginPage> {
                         )),
                     SizedBox(
                       height: 10,
+                    ),
+            
+                    //Error message
+                    Text(
+                      errorMessage,
+                      style: TextStyle(color: Colors.red),
+                      textAlign: TextAlign.center,
                     ),
             
                     //Sign In button
