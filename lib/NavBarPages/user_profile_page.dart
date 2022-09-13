@@ -25,6 +25,7 @@ class profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     //Temporary sign out function that can be activated by clicking hte profile
     //page text
     Future SignOut() async {

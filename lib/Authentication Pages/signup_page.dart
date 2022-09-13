@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_adjacent_string_concatenation
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
@@ -17,28 +18,80 @@ class _SignupPageState extends State<SignupPage> {
   bool passwordHidden = true;
   String eyeIconName = "";
   String errorMessage = "";
+  late UserCredential userCreds;
+  late User? user;
 
   //text controllers
-  final _nameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
+  /*
+  signUp
+
+  This method creates a new user in Firebase using the creatUser method that
+  firebase provides. At this moment, this method can only create a user using an
+  email and password provided by the user, there is no SSO capabilities yet.
+  This method checks that the two passwords entered by the user matches, and
+  that the password meets the complexity requirements. In the event of an error,
+  the try catch should catch the error's message and assign it to the
+  errorMessage variable, allowing it to be displayed to the user.
+  */
   Future signUp() async {
-    if (passwordConfirmed() && passwordComplexity()) {
+    bool ageAccept = await ageAcceptance(context);
+    if (passwordConfirmed() && passwordComplexity() && ageAccept) {
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        userCreds = await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: _emailController.text.trim(),
             password: _passwordController.text.trim());
-        errorMessage = "";
+        user = userCreds.user;
       } on FirebaseAuthException catch (error) {
+        //setState is required so that the widget is rebuilt to display the new
+        //text.
         setState(() {
           errorMessage = error.message!;
         });
       }
+
+      //Once user is created, the personal information is stored.
+      addUserDetails(_firstNameController.text.trim(),
+          _lastNameController.text.trim(), _emailController.text.trim());
+      errorMessage = "";
     }
   }
 
+  /*
+  addUserDetails
+
+  This method is used to add the user's first, last name, and email into
+  Firestore. This method creates a new document using the user's ID number which
+  gets created when they sign up. This ensures that the document for each user
+  will have different names. This document is created within the users
+  collection in Firestore.  The parameters for this method should just take the
+  TextEditingControllers associated with each parameter name.
+
+  @param firstName  The user's first name.
+  @param lastName   The user's last name.
+  @param email      The user's email.
+  */
+  Future addUserDetails(String firstName, String lastName, String email) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .set({"first name": firstName, "last name": lastName, "email": email});
+  }
+
+  /*
+  passwordConfirmed
+
+  This method checks that the two passwords that the user enters matches. The
+  method will return true if they match and false if they do not as well as 
+  assigning a message to the errorMessage variable to be displayed to the user.
+
+  @return bool  True if passwords match, false if they do not.
+  */
   bool passwordConfirmed() {
     if (_passwordController.text.trim() ==
         _confirmPasswordController.text.trim()) {
@@ -51,6 +104,22 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
+  /*
+  passwordComplexity
+
+  This method checks that the password meets the complexity requirements using
+  a regex. The current password requirements are as follows:
+  - At least 1 digit
+  - At least 1 special character
+  - At lease 12 characters
+  If the password meets these requirements the true will be returned if it does
+  not meet these requirements then false will be returned as well as setting the
+  errorMessage variable to a message advising the user to enter a password that
+  meets the complexity requirements.
+
+  @return boolean True if the password matches complexity requirements, false if
+                  it does not meet the requirements.
+  */
   bool passwordComplexity() {
     //Regex checks that password has at least 1 digit, and 1 special character,
     //and that it is at least 12 characters.
@@ -66,10 +135,62 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
+  /*
+  passViewChange
+
+  This method is used to change the status of the obscuretiy of the password
+  field. It is designed to just switch this bool variable to the opposite of
+  what it currently is.
+  */
+  void _passViewChange() {
+    setState(() {
+      passwordHidden = !passwordHidden;
+    });
+  }
+
+  Future ageAcceptance(context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text(
+              // ignore: prefer_interpolation_to_compose_strings
+              // ignore: prefer_adjacent_string_concatenation, prefer_interpolation_to_compose_strings
+              "To finish sign up, you agree that you are at least 13 years of" +
+                  " age. Click cancel if you are younger then 13 and to abort" +
+                  " sign up. Click accept to agree and continue.",
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  'Cancel',
+                ),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              TextButton(
+                child: Text(
+                  'Accept',
+                ),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              )
+            ],
+          );
+        });
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     super.dispose();
   }
 
@@ -80,7 +201,6 @@ class _SignupPageState extends State<SignupPage> {
         body: SafeArea(
           child: Form(
             key: formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Center(
               child: Container(
                 height: 750,
@@ -101,6 +221,7 @@ class _SignupPageState extends State<SignupPage> {
                         offset: Offset(-5, -5)),
                   ],
                 ),
+                //##### Main Window #####
                 child: SingleChildScrollView(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -131,6 +252,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
 
+                        //Space between greeting and image
                         SizedBox(
                           height: 20,
                         ),
@@ -143,11 +265,12 @@ class _SignupPageState extends State<SignupPage> {
                             child:
                                 Image.asset("images/Goalero Logo No BG.png")),
 
+                        //Space between image and first text field
                         SizedBox(
                           height: 20,
                         ),
 
-                        //##### First ans last name textfield #####
+                        //##### First and last name textfield #####
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5.0),
                           child: Row(
@@ -161,6 +284,9 @@ class _SignupPageState extends State<SignupPage> {
                                       ),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: TextFormField(
+                                    controller: _firstNameController,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(8),
                                       border: InputBorder.none,
@@ -176,6 +302,7 @@ class _SignupPageState extends State<SignupPage> {
                                   ),
                                 ),
                               ),
+                              //Distance between first and last name fields
                               SizedBox(
                                 width: 3,
                               ),
@@ -188,6 +315,9 @@ class _SignupPageState extends State<SignupPage> {
                                       ),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: TextFormField(
+                                    controller: _lastNameController,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(8),
                                       border: InputBorder.none,
@@ -207,6 +337,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
 
+                        //Space between first and second row of text fields
                         SizedBox(
                           height: 10,
                         ),
@@ -222,6 +353,8 @@ class _SignupPageState extends State<SignupPage> {
                                 ),
                                 borderRadius: BorderRadius.circular(15)),
                             child: TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               controller: _emailController,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(8),
@@ -236,6 +369,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
 
+                        //Space between email and password textfield
                         SizedBox(
                           height: 10,
                         ),
@@ -269,6 +403,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
 
+                        //Space between password and confirm password fields
                         SizedBox(
                           height: 10,
                         ),
@@ -302,6 +437,8 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
 
+                        //Space between confirm password and password
+                        //requirements
                         SizedBox(
                           height: 10,
                         ),
@@ -321,6 +458,8 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
 
+                        //Space between password requirements and any sign up
+                        //error messages
                         SizedBox(
                           height: 10,
                         ),
@@ -335,6 +474,8 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
 
+                        //Space between sign up error messages and sign up
+                        //button
                         SizedBox(
                           height: 10,
                         ),
@@ -380,7 +521,7 @@ class _SignupPageState extends State<SignupPage> {
                           height: 10,
                         ),
 
-                        //Forgot your password text button and SignUp text Button
+                        //Sign up page button
                         GestureDetector(
                           onTap: widget.showLoginPage,
                           child: Row(
@@ -408,11 +549,5 @@ class _SignupPageState extends State<SignupPage> {
             ),
           ),
         ));
-  }
-
-  void _passViewChange() {
-    setState(() {
-      passwordHidden = !passwordHidden;
-    });
   }
 }
