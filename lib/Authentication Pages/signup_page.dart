@@ -83,7 +83,7 @@ class _SignupPageState extends State<SignupPage> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Center(
               child: Container(
-                height: 720,
+                height: 750,
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -111,12 +111,14 @@ class _SignupPageState extends State<SignupPage> {
                           height: 10,
                         ),
                         //Greeting
-                        const Text(
-                          "Looks Like You're New!",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        
+                          const Text(
+                            "Looks Like You're New!",textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          
                         ),
                         //Spacing between greeting lines
                         const SizedBox(
@@ -147,7 +149,7 @@ class _SignupPageState extends State<SignupPage> {
 
                         //##### First ans last name textfield #####
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5.0),
                           child: Row(
                             children: [
                               Expanded(

@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/landingPage": (context) => const LandingPage(),
         "/dashboardPage": (context) => DashboardPage(),
+        "/addGoal":(context) => addGoal(),
         "/MainPage": (context) => MainPage(),
         "/MainPage2": (context) => MainPage2(),
       },
@@ -82,13 +83,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           Icons.home_outlined,
           color: Colors.black,
         ),
-        label: 'Hoem'),
+        label: 'Home'),
     const BottomNavigationBarItem(
         icon: Icon(
           Icons.chat_bubble_outline_rounded,
           color: Colors.black,
         ),
         label: 'Chat'),
+            const BottomNavigationBarItem(
+        icon: Icon(
+          Icons.hourglass_empty,
+          color: Colors.white,
+        ),
+        label: 'Add'),
     const BottomNavigationBarItem(
         icon: Padding(
           padding: EdgeInsets.only(),
@@ -145,7 +152,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         children: const [
           home(),
           chat(),
-          //addGoal(),
+          addGoal(),
           trendingGoals(),
           profile(),
         ],
