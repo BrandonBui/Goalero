@@ -13,6 +13,7 @@ import 'Authentication Pages/signup_page.dart';
 import 'dashboard.dart';
 import 'landing_page.dart';
 import 'NavBarPages/home_page.dart';
+import 'NavBarPages/add_goal_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         "/landingPage": (context) => const LandingPage(),
         "/dashboardPage": (context) => DashboardPage(),
         "/MainPage": (context) => MainPage(),
+        "/addGoal": (context) => addGoal(),
       },
     );
   }
