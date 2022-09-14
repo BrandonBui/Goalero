@@ -22,8 +22,8 @@ class _SignupPageState extends State<SignupPage> {
   late User? user;
 
   //text controllers
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -56,8 +56,8 @@ class _SignupPageState extends State<SignupPage> {
       }
 
       //Once user is created, the personal information is stored.
-      addUserDetails(_firstNameController.text.trim(),
-          _lastNameController.text.trim(), _emailController.text.trim());
+      addUserDetails(_nameController.text.trim(),
+          _usernameController.text.trim(), _emailController.text.trim());
       errorMessage = "";
     }
   }
@@ -76,11 +76,11 @@ class _SignupPageState extends State<SignupPage> {
   @param lastName   The user's last name.
   @param email      The user's email.
   */
-  Future addUserDetails(String firstName, String lastName, String email) async {
+  Future addUserDetails(String name, String username, String email) async {
     await FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
-        .set({"first name": firstName, "last name": lastName, "email": email});
+        .set({"real name": name, "username": username, "email": email});
   }
 
   /*
@@ -189,8 +189,8 @@ class _SignupPageState extends State<SignupPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _firstNameController.dispose();
-    _lastNameController.dispose();
+    _nameController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 
@@ -232,14 +232,14 @@ class _SignupPageState extends State<SignupPage> {
                           height: 10,
                         ),
                         //Greeting
-                        
-                          const Text(
-                            "Looks Like You're New!",textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          
+
+                        const Text(
+                          "Looks Like You're New!",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         //Spacing between greeting lines
                         const SizedBox(
@@ -272,7 +272,8 @@ class _SignupPageState extends State<SignupPage> {
 
                         //##### First and last name textfield #####
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 5.0),
                           child: Row(
                             children: [
                               Expanded(
@@ -284,17 +285,17 @@ class _SignupPageState extends State<SignupPage> {
                                       ),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: TextFormField(
-                                    controller: _firstNameController,
+                                    controller: _nameController,
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(8),
                                       border: InputBorder.none,
-                                      hintText: "First Name",
+                                      hintText: "Name (Not displayed publicly)",
                                     ),
                                     validator: (value) {
                                       if (value == "") {
-                                        return "Please enter your first name.";
+                                        return "Please enter your name.";
                                       } else {
                                         return null; //name is valid/there is a name
                                       }
@@ -315,17 +316,17 @@ class _SignupPageState extends State<SignupPage> {
                                       ),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: TextFormField(
-                                    controller: _lastNameController,
+                                    controller: _usernameController,
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
                                     decoration: InputDecoration(
                                       contentPadding: EdgeInsets.all(8),
                                       border: InputBorder.none,
-                                      hintText: "Last Name",
+                                      hintText: "Username (Displayed publicly)",
                                     ),
                                     validator: (value) {
                                       if (value == "") {
-                                        return "Please enter your last name.";
+                                        return "Please enter a username.";
                                       } else {
                                         return null; //name is valid/there is a name
                                       }
