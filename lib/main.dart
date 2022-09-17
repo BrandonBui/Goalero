@@ -168,7 +168,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   });
                 }),
                 children: [
-                  const home(),
+                  home(
+                    curUser: curUser,
+                  ),
                   chat(curUser: curUser),
                   addGoal(curUser: curUser),
                   trendingGoals(curUser: curUser),
