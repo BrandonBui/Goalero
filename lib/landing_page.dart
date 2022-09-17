@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:goalero/dashboard.dart';
 import 'package:goalero/Authentication%20Pages/main_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';

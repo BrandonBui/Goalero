@@ -11,7 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'Authentication Pages/login_page.dart';
 import 'Authentication Pages/signup_page.dart';
 // import "./logo_loading.dart";
-import 'dashboard.dart';
 import 'landing_page.dart';
 import 'NavBarPages/home_page.dart';
 import 'NavBarPages/add_goal_page.dart';
@@ -35,7 +34,6 @@ class MyApp extends StatelessWidget {
       initialRoute: "/MainPage2",
       routes: {
         "/landingPage": (context) => const LandingPage(),
-        "/dashboardPage": (context) => DashboardPage(),
         "/addGoal":(context) => addGoal(),
         "/MainPage": (context) => MainPage(),
         "/addGoal": (context) => addGoal(),
@@ -151,7 +149,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             _currentIndex = newIndex;
           });
         }),
-        children: const [
+        children: [
           home(),
           chat(),
           addGoal(),
@@ -166,10 +164,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             borderRadius: BorderRadius.circular(200),
             boxShadow: const [
               BoxShadow(
-                  color: Color(0XFF3F826D),
-                  spreadRadius: 2,
+                  color: Color.fromARGB(255, 119, 171, 244),
+                  spreadRadius: 1,
                   blurRadius: 5,
-                  offset: Offset(0, 8)),
+                offset: Offset(1, 4)),
             ],
           ),
           child: ClipRRect(
@@ -178,8 +176,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               backgroundColor: Colors.white,
               items: _bottomNavBarItems,
               showUnselectedLabels: false,
-              fixedColor: Colors.green,
-              selectedIconTheme: IconThemeData(color: Colors.greenAccent),
+              fixedColor: Colors.black,
+              selectedIconTheme: IconThemeData(color: Colors.black),
               type: BottomNavigationBarType.fixed,
               currentIndex: _currentIndex,
               onTap: (index) {
