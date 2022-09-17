@@ -72,15 +72,24 @@ class _SignupPageState extends State<SignupPage> {
   collection in Firestore.  The parameters for this method should just take the
   TextEditingControllers associated with each parameter name.
 
+  Update 9/16/2022
+  Email field removed since FireAuth instace already stores the email address. 4 
+  new fields added: bio, goal count, badge count, and friend count. These are
+  just being instantiated with "default" values being assigned to them.
+
   @param firstName  The user's first name.
   @param lastName   The user's last name.
   @param email      The user's email.
   */
   Future addUserDetails(String name, String username, String email) async {
-    await FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .set({"real name": name, "username": username, "email": email});
+    await FirebaseFirestore.instance.collection("users").doc(user!.uid).set({
+      "real name": name,
+      "username": username,
+      "bio": "",
+      "goal count": 0,
+      "badge count": 0,
+      "friend count": 0
+    });
   }
 
   /*
