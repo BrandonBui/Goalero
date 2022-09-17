@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:goalero/app_user.dart';
 
-class trendingGoals extends StatelessWidget {
-  const trendingGoals({Key? key}) : super(key: key);
-  
+class trendingGoals extends StatefulWidget {
+  final AppUser curUser;
+
+  const trendingGoals({Key? key, required this.curUser}) : super(key: key);
+
+  @override
+  State<trendingGoals> createState() => _trendingGoalsState();
+}
+
+class _trendingGoalsState extends State<trendingGoals> {
   @override
   Widget build(BuildContext context) {
     return Container(

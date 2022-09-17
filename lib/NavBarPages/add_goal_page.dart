@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:goalero/app_user.dart';
 
-class addGoal extends StatelessWidget {
-  const addGoal({Key? key}) : super(key: key);
+class addGoal extends StatefulWidget {
+  final AppUser curUser;
 
+  const addGoal({Key? key, required this.curUser}) : super(key: key);
+
+  @override
+  State<addGoal> createState() => _addGoalState();
+}
+
+class _addGoalState extends State<addGoal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:goalero/Authentication%20Pages/main_page2.dart';
@@ -6,6 +8,7 @@ import 'package:goalero/NavBarPages/chat_page.dart';
 import 'package:goalero/NavBarPages/trending_goals.dart';
 import 'package:goalero/NavBarPages/user_profile_page.dart';
 import 'package:goalero/Authentication Pages/main_page.dart';
+import 'package:goalero/app_user.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'Authentication Pages/login_page.dart';
@@ -34,9 +37,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/MainPage2",
       routes: {
         "/landingPage": (context) => const LandingPage(),
-        "/addGoal":(context) => addGoal(),
         "/MainPage": (context) => MainPage(),
-        "/addGoal": (context) => addGoal(),
         "/MainPage2": (context) => MainPage2(),
       },
     );
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           color: Colors.black,
         ),
         label: 'Chat'),
-            const BottomNavigationBarItem(
+    const BottomNavigationBarItem(
         icon: Icon(
           Icons.hourglass_empty,
           color: Colors.white,
@@ -112,85 +113,109 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
         label: 'Profile'),
   ];
+  final user = FirebaseAuth.instance.currentUser!;
+
+  Stream<AppUser> readUser() => FirebaseFirestore.instance
+      .collection('users')
+      .doc(user.uid)
+      .snapshots()
+      .map((doc) => AppUser.fromJson(doc.data()));
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: RotationTransition(
-        //floating action button
-        turns: animation,
-        child: RotationTransition(
-          turns: AlwaysStoppedAnimation(45 / 360),
-          child: FloatingActionButton(
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
+    return StreamBuilder<AppUser>(
+        stream: readUser(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong!');
+          }
+          if (snapshot.hasData) {
+            final curUser = snapshot.data!;
+
+            return Scaffold(
+              floatingActionButton: RotationTransition(
+                //floating action button
+                turns: animation,
+                child: RotationTransition(
+                  turns: AlwaysStoppedAnimation(45 / 360),
+                  child: FloatingActionButton(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/addGoal");
+                    },
+                    tooltip: "Add Goal",
+                    elevation: 4.0,
+                    backgroundColor: Colors.black,
+                    child: RotationTransition(
+                      turns: AlwaysStoppedAnimation(-45 / 360),
+                      child: const Icon(Icons.add_circle_outline_rounded),
+                    ),
+                  ),
+                ),
               ),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, "/addGoal");
-            },
-            tooltip: "Add Goal",
-            elevation: 4.0,
-            backgroundColor: Colors.black,
-            child: RotationTransition(
-              turns: AlwaysStoppedAnimation(-45 / 360),
-              child: const Icon(Icons.add_circle_outline_rounded),
-            ),
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      extendBody: true,
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: ((newIndex) {
-          setState(() {
-            _currentIndex = newIndex;
-          });
-        }),
-        children: [
-          home(),
-          chat(),
-          addGoal(),
-          trendingGoals(),
-          profile(),
-        ],
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(200),
-            boxShadow: const [
-              BoxShadow(
-                  color: Color.fromARGB(255, 119, 171, 244),
-                  spreadRadius: 1,
-                  blurRadius: 5,
-                offset: Offset(1, 4)),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(200)),
-            child: BottomNavigationBar(
-              backgroundColor: Colors.white,
-              items: _bottomNavBarItems,
-              showUnselectedLabels: false,
-              fixedColor: Colors.black,
-              selectedIconTheme: IconThemeData(color: Colors.black),
-              type: BottomNavigationBarType.fixed,
-              currentIndex: _currentIndex,
-              onTap: (index) {
-                setState(() {
-                  _pageController.animateToPage(index,
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.easeIn);
-                });
-              },
-            ),
-          ),
-        ),
-      ),
-    );
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerDocked,
+              extendBody: true,
+              body: PageView(
+                controller: _pageController,
+                onPageChanged: ((newIndex) {
+                  setState(() {
+                    _currentIndex = newIndex;
+                  });
+                }),
+                children: [
+                  const home(),
+                  chat(curUser: curUser),
+                  addGoal(curUser: curUser),
+                  trendingGoals(curUser: curUser),
+                  profile(curUser: curUser),
+                ],
+              ),
+              bottomNavigationBar: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(200),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Color(0XFF3F826D),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 8)),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(200)),
+                    child: BottomNavigationBar(
+                      backgroundColor: Colors.white,
+                      items: _bottomNavBarItems,
+                      showUnselectedLabels: false,
+                      fixedColor: Colors.green,
+                      selectedIconTheme:
+                          IconThemeData(color: Colors.greenAccent),
+                      type: BottomNavigationBarType.fixed,
+                      currentIndex: _currentIndex,
+                      onTap: (index) {
+                        setState(() {
+                          _pageController.animateToPage(index,
+                              duration: const Duration(milliseconds: 250),
+                              curve: Curves.easeIn);
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
   }
 }
