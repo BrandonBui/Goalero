@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:goalero/Authentication%20Pages/login_page.dart';
 import 'package:goalero/logo_loading.dart';
-import 'package:goalero/temp_home.dart';
+import 'package:goalero/Old/Unecessaary%20Pages/temp_home.dart';
 
 void main() {
   runApp(const MyApp());

@@ -4,7 +4,7 @@ import 'package:goalero/Authentication%20Pages/auth_page.dart';
 import 'package:goalero/Authentication%20Pages/login_page.dart';
 import 'package:goalero/logo_loading.dart';
 import 'package:goalero/main.dart';
-import 'package:goalero/temp_home.dart';
+import 'package:goalero/Old/Unecessaary%20Pages/temp_home.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goalero/app_user.dart';
+import 'package:goalero/User%20Information/app_user.dart';
 // ignore: slash_for_doc_comments
 /** 
  * The user profile class is used for displaying a users information on a

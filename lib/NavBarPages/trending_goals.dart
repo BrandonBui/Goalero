@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goalero/app_user.dart';
+import 'package:goalero/User%20Information/app_user.dart';
 
 class trendingGoals extends StatefulWidget {
   final AppUser curUser;

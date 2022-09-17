@@ -8,7 +8,7 @@ import 'package:goalero/NavBarPages/chat_page.dart';
 import 'package:goalero/NavBarPages/trending_goals.dart';
 import 'package:goalero/NavBarPages/user_profile_page.dart';
 import 'package:goalero/Authentication Pages/main_page.dart';
-import 'package:goalero/app_user.dart';
+import 'package:goalero/User%20Information/app_user.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'Authentication Pages/login_page.dart';
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         stream: readUser(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Text('Something went wrong!');
+            return const Text('Something went wrong!');
           }
           if (snapshot.hasData) {
             final curUser = snapshot.data!;
