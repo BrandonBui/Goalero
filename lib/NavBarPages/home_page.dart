@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goalero/User%20Information/app_user.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class home extends StatefulWidget {
   final AppUser curUser;
@@ -83,7 +84,7 @@ class _homeState extends State<home> {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     boxShadow: [
                       BoxShadow(
-                        color: Color.fromARGB(255, 126, 173, 255),
+                        color: Color.fromARGB(255, 130, 112, 230),
                         spreadRadius: 2.0,
                         blurRadius: 4,
                         offset: Offset(0, 3), // Shadow position
@@ -176,7 +177,7 @@ class _homeState extends State<home> {
                   ),
                   Container(
                     child: Text(
-                      "PizzaLover123",
+                      widget.curUser.realName,
                       style: GoogleFonts.poppins(
                           color: Colors.black,
                           fontSize: 30,
@@ -280,11 +281,18 @@ class _homeState extends State<home> {
               alignment: Alignment(0, 0.7),
               child: SizedBox(
                   height: 100,
-                  child: ListView.builder(
+                  child: ScrollSnapList(
                       itemBuilder: (context, index) {
                         return meetingCards(index);
                       },
-                      itemCount: meetingContent.length)),
+                      //This is part of the ScrollSnapList package
+                      itemCount: meetingContent.length, 
+                      dynamicItemSize: true, //makes it snap
+                      itemSize: 100, //how fast the scroll is 
+                      onItemFocus: (index ) {  },
+                      scrollDirection: Axis.vertical, //direction of scroll
+                      )
+                      ),
             ),
           ],
         ),

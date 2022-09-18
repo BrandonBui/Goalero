@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(200),
                     boxShadow: const [
                       BoxShadow(
-                          color: Color(0XFF3F826D),
+                          color: Color.fromARGB(255, 130, 112, 230),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 8)),
@@ -196,9 +196,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       backgroundColor: Colors.white,
                       items: _bottomNavBarItems,
                       showUnselectedLabels: false,
-                      fixedColor: Colors.green,
+                      fixedColor: Color.fromARGB(255, 130, 112, 230),
                       selectedIconTheme:
-                          IconThemeData(color: Colors.greenAccent),
+                          IconThemeData(color: Color.fromARGB(255, 130, 112, 230)),
                       type: BottomNavigationBarType.fixed,
                       currentIndex: _currentIndex,
                       onTap: (index) {
