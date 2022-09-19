@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:goalero/User%20Information/app_user.dart';
+import 'package:goalero/User%20Information/goal.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class home extends StatefulWidget {
   final AppUser curUser;
-  const home({Key? key, required this.curUser}) : super(key: key);
+  final List<Goal> goalList;
+  const home({Key? key, required this.curUser, required this.goalList})
+      : super(key: key);
 
   @override
   State<home> createState() => _homeState();
@@ -50,25 +53,42 @@ class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     //GOAL CARD WIDGET BUILDER
-    Widget buildCard(index) => Column(
-          mainAxisSize: MainAxisSize.min,
+    Widget buildCard(int index) => Stack(
           children: [
+            /*
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
+              
               child: Image.network(
                 'https://source.unsplash.com/random?sig=$index', //** IMAGE HERE */
                 height: 150, //** BOX HEIGHT */
                 width: 150, //** BOX WIDTH */
                 fit: BoxFit.cover,
               ),
+              */
+            Center(
+                child: SizedBox(
+                    height: 150,
+                    width: 150,
+                    child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Center(
+                          child:
+                              Text(widget.goalList[index].goalName.toString()),
+                        )))),
+            /*
             ),
             const SizedBox(height: 8),
-            Text('Goal $index',
-                style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500)), //**IMAGE CAPTION TEXT */
+            Text(goal.goalName), //**IMAGE CAPTION TEXT */
+
+            */
           ],
+        );
+
+    Widget buildGoal(Goal goal) => ListTile(
+          title: Text(goal.goalName),
         );
 
     //MEETINGS CARDS WIDGET BUILDER
@@ -217,7 +237,7 @@ class _homeState extends State<home> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width / 2.5),
+                    SizedBox(width: MediaQuery.of(context).size.width - 195),
                     Icon(Icons.add),
                   ],
                 ),
@@ -238,13 +258,13 @@ class _homeState extends State<home> {
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           padding: const EdgeInsets.all(12),
-                          itemBuilder: (context, index) => buildCard(index + 1),
+                          itemBuilder: (context, index) => buildCard(index),
                           separatorBuilder: (context, index) {
                             return SizedBox(
                               width: betweenSpacing, //** BETWEEN SPACING */
                             );
                           },
-                          itemCount: 10,
+                          itemCount: widget.curUser.goalCount,
                         ),
                       )
                     ],
@@ -282,17 +302,16 @@ class _homeState extends State<home> {
               child: SizedBox(
                   height: 100,
                   child: ScrollSnapList(
-                      itemBuilder: (context, index) {
-                        return meetingCards(index);
-                      },
-                      //This is part of the ScrollSnapList package
-                      itemCount: meetingContent.length, 
-                      dynamicItemSize: true, //makes it snap
-                      itemSize: 100, //how fast the scroll is 
-                      onItemFocus: (index ) {  },
-                      scrollDirection: Axis.vertical, //direction of scroll
-                      )
-                      ),
+                    itemBuilder: (context, index) {
+                      return meetingCards(index);
+                    },
+                    //This is part of the ScrollSnapList package
+                    itemCount: meetingContent.length,
+                    dynamicItemSize: true, //makes it snap
+                    itemSize: 100, //how fast the scroll is
+                    onItemFocus: (index) {},
+                    scrollDirection: Axis.vertical, //direction of scroll
+                  )),
             ),
           ],
         ),
