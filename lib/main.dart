@@ -168,9 +168,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   });
                 }),
                 children: [
-                  home(
-                    curUser: curUser,
-                  ),
+                  home(curUser: curUser),
                   chat(curUser: curUser),
                   addGoal(curUser: curUser),
                   trendingGoals(curUser: curUser),
@@ -197,8 +195,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       items: _bottomNavBarItems,
                       showUnselectedLabels: false,
                       fixedColor: Color.fromARGB(255, 130, 112, 230),
-                      selectedIconTheme:
-                          IconThemeData(color: Color.fromARGB(255, 130, 112, 230)),
+                      selectedIconTheme: IconThemeData(
+                          color: Color.fromARGB(255, 130, 112, 230)),
                       type: BottomNavigationBarType.fixed,
                       currentIndex: _currentIndex,
                       onTap: (index) {

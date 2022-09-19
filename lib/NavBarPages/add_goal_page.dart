@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goalero/User%20Information/app_user.dart';
 
@@ -11,6 +14,27 @@ class addGoal extends StatefulWidget {
 }
 
 class _addGoalState extends State<addGoal> {
+  final authUser = FirebaseAuth.instance.currentUser;
+
+  /*
+
+  */
+  Future addNewGoal(String goalName, String goalCategory,
+      String goalDescription, String goalCompletionDate) async {
+    int goalNumber = widget.curUser.goalCount + 1;
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(authUser!.uid)
+        .collection("goals")
+        .doc("goal$goalNumber")
+        .set({
+      "goal name": goalName,
+      "goal category": goalCategory,
+      "goal description": goalDescription,
+      "goal completion date": goalCompletionDate
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

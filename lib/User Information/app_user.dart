@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goalero/User%20Information/goal.dart';
 
 class AppUser {
   final String realName;
@@ -7,6 +8,7 @@ class AppUser {
   final int goalCount;
   final int badgeCount;
   final int friendCount;
+  final List<goal> goalsList;
 
   AppUser(
       {required this.realName,
@@ -14,7 +16,8 @@ class AppUser {
       required this.bio,
       required this.goalCount,
       required this.badgeCount,
-      required this.friendCount});
+      required this.friendCount,
+      required this.goalsList});
 
   Map<dynamic, dynamic> toJson() => {
         'real name': realName,
@@ -22,7 +25,8 @@ class AppUser {
         'bio': bio,
         'goal count': goalCount,
         'badge count': badgeCount,
-        'friend count': friendCount
+        'friend count': friendCount,
+        'goals': goalsList.toList()
       };
 
   static AppUser fromJson(Map<dynamic, dynamic>? json) => AppUser(
@@ -31,5 +35,6 @@ class AppUser {
       bio: json['bio'],
       goalCount: json['goal count'],
       badgeCount: json['badge count'],
-      friendCount: json['friend count']);
+      friendCount: json['friend count'],
+      goalsList: json['goals']);
 }
