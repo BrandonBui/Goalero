@@ -8,16 +8,17 @@ class AppUser {
   final int goalCount;
   final int badgeCount;
   final int friendCount;
-  final List<goal> goalsList;
+  //final List<goal> goalsList;
 
-  AppUser(
-      {required this.realName,
-      required this.userName,
-      required this.bio,
-      required this.goalCount,
-      required this.badgeCount,
-      required this.friendCount,
-      required this.goalsList});
+  AppUser({
+    required this.realName,
+    required this.userName,
+    required this.bio,
+    required this.goalCount,
+    required this.badgeCount,
+    required this.friendCount,
+    //required this.goalsList
+  });
 
   Map<dynamic, dynamic> toJson() => {
         'real name': realName,
@@ -26,15 +27,16 @@ class AppUser {
         'goal count': goalCount,
         'badge count': badgeCount,
         'friend count': friendCount,
-        'goals': goalsList.toList()
+        //'goals': goalsList.toList()
       };
 
   static AppUser fromJson(Map<dynamic, dynamic>? json) => AppUser(
-      realName: json!['real name'],
-      userName: json['username'],
-      bio: json['bio'],
-      goalCount: json['goal count'],
-      badgeCount: json['badge count'],
-      friendCount: json['friend count'],
-      goalsList: json['goals']);
+        realName: json!['real name'],
+        userName: json['username'],
+        bio: json['bio'],
+        goalCount: json['goal count'],
+        badgeCount: json['badge count'],
+        friendCount: json['friend count'],
+        //goalsList: json['goals']
+      );
 }
