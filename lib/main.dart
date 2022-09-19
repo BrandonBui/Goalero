@@ -163,7 +163,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               ),
                             ),
                             onPressed: () {
-                              Navigator.pushNamed(context, "/addGoal");
+                              setState(() {
+                                 _currentIndex = 2;
+                                 _pageController.animateToPage(_currentIndex,
+                                      duration:
+                                          const Duration(milliseconds: 250),
+                                      curve: Curves.easeIn);
+                              });
                             },
                             tooltip: "Add Goal",
                             elevation: 4.0,
