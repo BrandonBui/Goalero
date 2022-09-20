@@ -131,15 +131,15 @@ class _homeState extends State<home> {
             child: Container(
                 height: 80,
                 width: MediaQuery.of(context).size.width / 1.2,
-                decoration: BoxDecoration(
+                decoration: BoxDecoration( //shadowing and background color of meeting cards
                     color: Color.fromRGBO(255, 255, 255, 1),
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     boxShadow: [
                       BoxShadow(
-                        color: Color.fromARGB(255, 130, 112, 230),
-                        spreadRadius: 2.0,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        spreadRadius: 0,
                         blurRadius: 4,
-                        offset: Offset(0, 3), // Shadow position
+                        offset: Offset(3, 3), // Shadow position
                       ),
                     ]),
                 child: Row(
@@ -204,6 +204,7 @@ class _homeState extends State<home> {
                 )),
           ),
         );
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 238, 238, 238),
       body: Container(
@@ -232,8 +233,8 @@ class _homeState extends State<home> {
                       widget.curUser.realName,
                       style: GoogleFonts.poppins(
                           color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 40,
+                          fontWeight: FontWeight.w700),
                     ),
                   )
                 ],
