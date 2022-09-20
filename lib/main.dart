@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         stream: readUser(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Text('Something went wrong!');
+            return Center(child: const Text('Something went wrong!'));
           }
           if (snapshot.hasData) {
             final curUser = snapshot.data!;
@@ -145,7 +145,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 stream: getGoals(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return const Text('Something went wrong! Error: getGoals');
+                    return Center(
+                        child: const Text(
+                            'Something went wrong! Error: getGoals'));
                   }
                   if (snapshot.hasData) {
                     final goalList = snapshot.data!;

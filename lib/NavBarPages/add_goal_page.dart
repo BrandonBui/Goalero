@@ -17,7 +17,10 @@ class _addGoalState extends State<addGoal> {
   final authUser = FirebaseAuth.instance.currentUser;
 
   /*
+  addNewGoal
 
+  Communicated to the firestore database to store the goal information inside of
+  a collection created within the user's document.
   */
   Future addNewGoal(String goalName, String goalCategory,
       String goalDescription, String goalCompletionDate) async {

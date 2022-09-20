@@ -71,13 +71,45 @@ class _homeState extends State<home> {
                     height: 150,
                     width: 150,
                     child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Center(
-                          child:
-                              Text(widget.goalList[index].goalName.toString()),
-                        )))),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 130, 112, 230),
+                              spreadRadius: 2.0,
+                              blurRadius: 4,
+                              offset: Offset(0, 3), // Shadow position
+                            ),
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(children: [
+                              //Goal category
+
+                              Text(
+                                widget.goalList[index].goalCategory.toString(),
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+
+                              Icon(Icons.wifi_1_bar_outlined),
+                            ]),
+
+                            //Goal title
+                            Text(
+                              widget.goalList[index].goalName.toString(),
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            //Goal description
+                            Text(widget.goalList[index].goalDesctiption
+                                .toString())
+                          ],
+                        ),
+                      ),
+                    ))),
             /*
             ),
             const SizedBox(height: 8),
@@ -173,7 +205,7 @@ class _homeState extends State<home> {
           ),
         );
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 238, 238, 238),
       body: Container(
         child: Stack(
           children: [
@@ -222,36 +254,35 @@ class _homeState extends State<home> {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment(-1, -.3),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30.0),
-                child: Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        "Your Goals",
-                        style: GoogleFonts.poppins(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    SizedBox(width: MediaQuery.of(context).size.width - 195),
-                    Icon(Icons.add),
-                  ],
+
+            Column(
+              children: [
+                SizedBox(
+                  height: 60,
                 ),
-              ),
-            ),
-            SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0),
-              child: Align(
-                alignment: Alignment.center,
-                child: Padding(
+                const SizedBox(height: 200),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Text(
+                          "Your Goals",
+                          style: GoogleFonts.poppins(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width - 195),
+                      Icon(Icons.add),
+                    ],
+                  ),
+                ),
+                Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
                         height: 210,
@@ -270,8 +301,10 @@ class _homeState extends State<home> {
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
+
+            //),
             RotationTransition(
               //bottom blob is slightly rotated
               turns: AlwaysStoppedAnimation(15 / 360),
@@ -282,6 +315,7 @@ class _homeState extends State<home> {
                     child: Image(image: AssetImage('images/SideBlob.png'))),
               ),
             ),
+            /*
             Padding(
               padding: const EdgeInsets.only(left: 40.0),
               child: Align(
@@ -313,6 +347,7 @@ class _homeState extends State<home> {
                     scrollDirection: Axis.vertical, //direction of scroll
                   )),
             ),
+            */
           ],
         ),
       ),
