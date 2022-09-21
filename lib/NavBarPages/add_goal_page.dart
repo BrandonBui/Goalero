@@ -6,7 +6,7 @@ import 'package:goalero/User%20Information/app_user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
-import '../specificAddGoal.dart';
+import '../customAddGoal.dart';
 
 class addGoal extends StatefulWidget {
   final AppUser curUser;
@@ -26,21 +26,7 @@ class _addGoalState extends State<addGoal> {
   Communicated to the firestore database to store the goal information inside of
   a collection created within the user's document.
   */
-  Future addNewGoal(String goalName, String goalCategory,
-      String goalDescription, String goalCompletionDate) async {
-    int goalNumber = widget.curUser.goalCount + 1;
-    await FirebaseFirestore.instance
-        .collection("users")
-        .doc(authUser!.uid)
-        .collection("goals")
-        .doc("goal$goalNumber")
-        .set({
-      "goal name": goalName,
-      "goal category": goalCategory,
-      "goal description": goalDescription,
-      "goal completion date": goalCompletionDate
-    });
-  }
+  
     Color colorchange = Color.fromARGB(255, 0, 0, 0);
     int timeMessage() {
     var hour = DateTime.now().hour;
@@ -154,7 +140,9 @@ class _addGoalState extends State<addGoal> {
                           return GestureDetector(
                             child: goalCards(index),
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const specificAddGoal()),);
+                              
+                              print(categories[index]);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => customAddGoal(widget.curUser)),);
                             },
                             );
                         },
@@ -177,4 +165,5 @@ class _addGoalState extends State<addGoal> {
       ),
     ),);
   }
+
 }
