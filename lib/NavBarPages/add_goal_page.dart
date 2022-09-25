@@ -2,10 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:goalero/PreMade%20Goals%20Pages/art.dart';
+import 'package:goalero/PreMade%20Goals%20Pages/cooking.dart';
+import 'package:goalero/PreMade%20Goals%20Pages/fitness.dart';
 import 'package:goalero/User%20Information/app_user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
+import '../PreMade Goals Pages/academic.dart';
 import '../customAddGoal.dart';
 
 class addGoal extends StatefulWidget {
@@ -50,7 +54,7 @@ class _addGoalState extends State<addGoal> {
 'images/running.png',
 'images/cooking.png',
 'images/art.png',
-'images/cooking.png',
+'images/education.png',
   ];
     var timesOfDay = [
     "Good Morning,",
@@ -104,28 +108,51 @@ class _addGoalState extends State<addGoal> {
       body: Container(
         child: Stack(
           children: [
+             Padding(
+               padding: const EdgeInsets.only(top: 70.0),
+               child: SafeArea(
+                 child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Text("Pick a Category", style: GoogleFonts.poppins(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w300)),
+                  /*child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Text(timesOfDay[timeMessage()],
+                            style: GoogleFonts.poppins(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w300)),
+                      ),
+                      Container(
+                        child: Text(
+                          widget.curUser.realName,
+                          style: GoogleFonts.poppins(
+                              color: Colors.black,
+                              fontSize: 40,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      )
+                    ],
+                  ),*/
+                           ),
+               ),
+             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30.0, top: 65.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    child: Text(timesOfDay[timeMessage()],
-                        style: GoogleFonts.poppins(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w300)),
-                  ),
-                  Container(
-                    child: Text(
-                      widget.curUser.realName,
-                      style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontSize: 40,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  )
-                ],
+              padding: const EdgeInsets.only(top: 40.0, right: 20.0),
+              child: SafeArea(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: GestureDetector(
+                    child: Image.asset('images/editIcon.png'),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => customAddGoal(widget.curUser)),);
+                    },
+                    ), 
+                ),
               ),
             ),
 
@@ -141,8 +168,17 @@ class _addGoalState extends State<addGoal> {
                             child: goalCards(index),
                             onTap: () {
                               
-                              print(categories[index]);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => customAddGoal(widget.curUser)),);
+                              print(categories[index]); //for debugging purposes
+                              if (index ==0){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => fitness(),));
+                              } else if (index ==1){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context) => cooking(),));
+                              } else if (index ==2){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => art(),));
+                              }else if (index ==3){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => academic(),));
+                              }
+                              
                             },
                             );
                         },
