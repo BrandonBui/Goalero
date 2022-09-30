@@ -113,6 +113,7 @@ class _addGoalState extends State<addGoal> {
       body: Container(
         child: Stack(
           children: [
+            //start of blob creation and placement
             Positioned(
               bottom: 470,
               left: 150,
@@ -134,6 +135,7 @@ class _addGoalState extends State<addGoal> {
                 image: AssetImage('images/Blobs/Asset 38 2.png'),
               ),
             ),
+            //end of blob creation and placement
             Padding(
               padding: const EdgeInsets.only(top: 70.0),
               child: SafeArea(
