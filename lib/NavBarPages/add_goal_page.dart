@@ -41,8 +41,9 @@ class _addGoalState extends State<addGoal> {
       "goal completion date": goalCompletionDate
     });
   }
-    Color colorchange = Color.fromARGB(255, 0, 0, 0);
-    int timeMessage() {
+
+  Color colorchange = Color.fromARGB(255, 0, 0, 0);
+  int timeMessage() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
       return 0; //morning
@@ -54,6 +55,7 @@ class _addGoalState extends State<addGoal> {
       return 3; //night
     }
   }
+
   List categories = [
     "Fitness",
     "Cooking",
@@ -61,12 +63,12 @@ class _addGoalState extends State<addGoal> {
     "Academic",
   ];
   List categoryImages = [
-'images/running.png',
-'images/cooking.png',
-'images/art.png',
-'images/cooking.png',
+    'images/running.png',
+    'images/cooking.png',
+    'images/art.png',
+    'images/cooking.png',
   ];
-    var timesOfDay = [
+  var timesOfDay = [
     "Good Morning,",
     "Good Afternoon,",
     "Good Evening,",
@@ -74,45 +76,49 @@ class _addGoalState extends State<addGoal> {
   ];
   @override
   Widget build(BuildContext context) {
-    // ADD GOAL CARDS 
-    Widget goalCards(index)=>Column(
-          children: [Container(
-                height: 100,
-                width: MediaQuery.of(context).size.width / 1.2,
-                decoration: BoxDecoration( //shadowing and background color of meeting cards
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        spreadRadius: 0,
-                        blurRadius: 4,
-                        offset: Offset(3, 3), // Shadow position
-                      ),
-                    ]
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left:10.0, top: 15.0),
-                        child: Text(categories[index],
+    // ADD GOAL CARDS
+    Widget goalCards(index) => Column(
+          children: [
+            Container(
+              height: 100,
+              width: MediaQuery.of(context).size.width / 1.2,
+              decoration: BoxDecoration(
+                  //shadowing and background color of meeting cards
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      spreadRadius: 0,
+                      blurRadius: 4,
+                      offset: Offset(3, 3), // Shadow position
+                    ),
+                  ]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0, top: 15.0),
+                    child: Text(categories[index],
                         style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500)),
-                      ),
-                      Container(
-                        height: 100,
-                        width: MediaQuery.of(context).size.width / 2.5,
-                        child: Image(image: AssetImage(categoryImages[index]), fit: BoxFit.cover,),
-                      )
-                    ],
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500)),
                   ),
-                ),
+                  Container(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    child: Image(
+                      image: AssetImage(categoryImages[index]),
+                      fit: BoxFit.cover,
+                    ),
+                  )
                 ],
-    );
+              ),
+            ),
+          ],
+        );
     //MAIN PAGE SETTINGS
     return Scaffold(
       body: Container(
@@ -142,39 +148,42 @@ class _addGoalState extends State<addGoal> {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(top: 50.0),
               child: Center(
-                  child: SizedBox(
+                child: SizedBox(
                     height: 500,
                     child: ListView.separated(
                       shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            child: goalCards(index),
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const specificAddGoal()),);
-                            },
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          child: goalCards(index),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const specificAddGoal()),
                             );
-                        },
-                        //This is part of the ScrollSnapList package
-                        itemCount: 4, 
-                        scrollDirection: Axis.vertical, 
-                        separatorBuilder: (context, index) { 
-                          return const SizedBox(
-                                height: 20.0, //** BETWEEN SPACING */
-                              );
-                         }, 
-                         
-                         //direction of scroll
-                        )
-                        ),
+                          },
+                        );
+                      },
+                      //This is part of the ScrollSnapList package
+                      itemCount: 4,
+                      scrollDirection: Axis.vertical,
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 20.0, //** BETWEEN SPACING */
+                        );
+                      },
+
+                      //direction of scroll
+                    )),
               ),
             ),
-
           ],
+        ),
       ),
-    ),);
+    );
   }
 }
