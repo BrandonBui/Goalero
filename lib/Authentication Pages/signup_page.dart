@@ -274,8 +274,7 @@ class _SignupPageState extends State<SignupPage> {
                             height: 150,
                             //color: Colors.green,
                             //padding: EdgeInsets.all(100),
-                            child:
-                                Image.asset("images/Goalero Logo No BG.png")),
+                            child: Image.asset("images/tileImages/9.png")),
 
                         //Space between image and first text field
                         SizedBox(
