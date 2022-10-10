@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:goalero/Authentication%20Pages/main_page2.dart';
-import 'package:goalero/Long%20Term%20Goal%20Pages/goal_page_five.dart';
+import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_5.dart';
 import 'package:goalero/NavBarPages/add_goal_page.dart';
 import 'package:goalero/NavBarPages/chat_page.dart';
 import 'package:goalero/NavBarPages/trending_goals.dart';
@@ -11,7 +11,7 @@ import 'package:goalero/NavBarPages/user_profile_page.dart';
 import 'package:goalero/Authentication Pages/main_page.dart';
 import 'package:goalero/User%20Information/app_user.dart';
 import 'package:goalero/User%20Information/goal.dart';
-import 'package:goalero/Long%20Term%20Goal%20Pages/goal_page_one.dart';
+import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_1.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'Authentication Pages/login_page.dart';
@@ -200,11 +200,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           chat(curUser: curUser),
                           addGoal(curUser: curUser),
                           trendingGoals(curUser: curUser),
-                          //profile(curUser: curUser),
-                          GoalPageOne(
-                            goalNumber: "goal1",
-                            currentGoal: "lose weight",
-                          ),
+                          profile(curUser: curUser),
                         ],
                       ),
                       bottomNavigationBar: Padding(
