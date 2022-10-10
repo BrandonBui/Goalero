@@ -146,13 +146,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             return StreamBuilder<List<Goal>>(
                 stream: getGoals(),
                 builder: (context, snapshot) {
+                  late final List<Goal> goalList;
                   if (snapshot.hasError) {
-                    return Center(
+                    goalList = [];
+                    /*return Center(
+                      
                         child: const Text(
                             'Something went wrong! Error: getGoals'));
+                            */
                   }
                   if (snapshot.hasData) {
-                    final goalList = snapshot.data!;
+                    goalList = snapshot.data!;
 
                     return Scaffold(
                       floatingActionButton: RotationTransition(
