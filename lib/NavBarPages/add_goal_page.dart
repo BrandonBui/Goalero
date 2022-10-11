@@ -26,14 +26,12 @@ class _addGoalState extends State<addGoal> {
 
   /*
   addNewGoal
-
   Communicated to the firestore database to store the goal information inside of
   a collection created within the user's document.
   */
 
-    Color colorchange = Color.fromARGB(255, 0, 0, 0);
-    int timeMessage() {
-
+  Color colorchange = Color.fromARGB(255, 0, 0, 0);
+  int timeMessage() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
       return 0; //morning
@@ -53,12 +51,10 @@ class _addGoalState extends State<addGoal> {
     "Academic",
   ];
   List categoryImages = [
-
-'images/running.png',
-'images/cooking.png',
-'images/art.png',
-'images/education.png',
-
+    'images/running.png',
+    'images/cooking.png',
+    'images/art.png',
+    'images/education.png',
   ];
   var timesOfDay = [
     "Good Morning,",
@@ -116,15 +112,16 @@ class _addGoalState extends State<addGoal> {
       body: Container(
         child: Stack(
           children: [
-             Padding(
-               padding: const EdgeInsets.only(top: 70.0),
-               child: SafeArea(
-                 child: Align(
+            Padding(
+              padding: const EdgeInsets.only(top: 70.0),
+              child: SafeArea(
+                child: Align(
                   alignment: Alignment.topCenter,
-                  child: Text("Pick a Category", style: GoogleFonts.poppins(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w300)),
+                  child: Text("Pick a Category",
+                      style: GoogleFonts.poppins(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300)),
                   /*child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -146,9 +143,9 @@ class _addGoalState extends State<addGoal> {
                       )
                     ],
                   ),*/
-                           ),
-               ),
-             ),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 40.0, right: 20.0),
               child: SafeArea(
@@ -157,9 +154,14 @@ class _addGoalState extends State<addGoal> {
                   child: GestureDetector(
                     child: Image.asset('images/editIcon.png'),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => customAddGoal(widget.curUser)),);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                customAddGoal(widget.curUser)),
+                      );
                     },
-                    ), 
+                  ),
                 ),
               ),
             ),
@@ -170,26 +172,36 @@ class _addGoalState extends State<addGoal> {
                     height: 500,
                     child: ListView.separated(
                       shrinkWrap: true,
-
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            child: goalCards(index),
-                            onTap: () {
-                              
-                              print(categories[index]); //for debugging purposes
-                              if (index ==0){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => fitness(),));
-                              } else if (index ==1){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context) => cooking(),));
-                              } else if (index ==2){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => art(),));
-                              }else if (index ==3){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => academic(),));
-                              }
-                              
-                            },
-
-                            );
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          child: goalCards(index),
+                          onTap: () {
+                            print(categories[index]); //for debugging purposes
+                            if (index == 0) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => fitness(),
+                                  ));
+                            } else if (index == 1) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => cooking(),
+                                  ));
+                            } else if (index == 2) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => art(),
+                                  ));
+                            } else if (index == 3) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => academic(),
+                                  ));
+                            }
                           },
                         );
                       },
@@ -211,5 +223,4 @@ class _addGoalState extends State<addGoal> {
       ),
     );
   }
-
 }
