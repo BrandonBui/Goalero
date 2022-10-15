@@ -129,7 +129,8 @@ class _homeState extends State<home> {
             child: Container(
                 height: 80,
                 width: MediaQuery.of(context).size.width / 1.2,
-                decoration: BoxDecoration( //shadowing and background color of meeting cards
+                decoration: BoxDecoration(
+                    //shadowing and background color of meeting cards
                     color: Color.fromRGBO(255, 255, 255, 1),
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     boxShadow: [
