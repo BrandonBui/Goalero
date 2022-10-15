@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:goalero/Authentication%20Pages/main_page2.dart';
 import 'package:goalero/NavBarPages/add_goal_page.dart';
 import 'package:goalero/NavBarPages/chat_page.dart';
+import 'package:goalero/NavBarPages/edit_user_profile_page.dart';
 import 'package:goalero/NavBarPages/trending_goals.dart';
 import 'package:goalero/NavBarPages/user_profile_page.dart';
 import 'package:goalero/Authentication Pages/main_page.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         "/landingPage": (context) => const LandingPage(),
         "/MainPage": (context) => MainPage(),
         "/MainPage2": (context) => MainPage2(),
+        "/editProfile": (context) => editProfile(),
       },
     );
   }
@@ -199,7 +201,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           chat(curUser: curUser),
                           addGoal(curUser: curUser),
                           trendingGoals(curUser: curUser),
-                          profile(curUser: curUser),
+                          profile(curUser: curUser, goalList: goalList,),
                         ],
                       ),
                       bottomNavigationBar: Padding(

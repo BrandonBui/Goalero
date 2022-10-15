@@ -137,7 +137,7 @@ class _SignupPageState extends State<SignupPage> {
     //If the password does not meet the requirements then the error message gets
     //set below and false is returned.
     if (!regex.hasMatch(_passwordController.text.trim())) {
-      errorMessage = "Please enter a password that meets the reuirements above";
+      errorMessage = "Please enter a password that meets the requirements above";
       return false;
     } else {
       return true;
