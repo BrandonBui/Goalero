@@ -81,8 +81,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             child: SingleChildScrollView(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     //Greeting
@@ -102,22 +101,31 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 18,
                       ),
                     ),
-            
+
                     SizedBox(
                       height: 20,
                     ),
-            
+
                     // Image Area
-                    Container(
-                        height: 150,
-                        //color: Colors.green,
-                        //padding: EdgeInsets.all(100),
-                        child: Image.asset("images/Goalero Logo No BG.png")),
-            
+                    Material(
+                      // profile picture, background and shadow
+                      borderRadius: BorderRadius.circular(180),
+                      elevation: 5,
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 80,
+                        child: CircleAvatar(
+                          radius: 75,
+                          backgroundImage:
+                              AssetImage("images/9.png"), //** USER IMAGE
+                        ),
+                      ),
+                    ),
+
                     SizedBox(
                       height: 20,
                     ),
-            
+
                     //Email textfield
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -138,11 +146,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-            
+
                     SizedBox(
                       height: 10,
                     ),
-            
+
                     //Pass textfield
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -171,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-            
+
                     //forgot password
                     SizedBox(
                       height: 20.0,
@@ -201,14 +209,14 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 10,
                     ),
-            
+
                     //Error message
                     Text(
                       errorMessage,
                       style: TextStyle(color: Colors.red),
                       textAlign: TextAlign.center,
                     ),
-            
+
                     //Sign In button
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -222,9 +230,10 @@ class _LoginPageState extends State<LoginPage> {
                         child: Container(
                           padding: EdgeInsets.all(15),
                           decoration: BoxDecoration(
-                              color: Color(0xFF3f826d),
+                              color: Color.fromARGB(255, 126, 50, 212),
                               borderRadius: BorderRadius.circular(15),
-                              border: Border.all(color: Color(0xFF3f826d))),
+                              border: Border.all(
+                                  color: Color.fromARGB(255, 126, 50, 212))),
                           child: Center(
                             child: Text(
                               "Sign In",
@@ -238,11 +247,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-            
+
                     SizedBox(
                       height: 10,
                     ),
-            
+
                     //Forgot your password text button and SignUp text Button
                     GestureDetector(
                       onTap: widget.showSignupPage,

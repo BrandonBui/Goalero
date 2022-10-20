@@ -270,11 +270,20 @@ class _SignupPageState extends State<SignupPage> {
                         ),
 
                         // Image Area
-                        SizedBox(
-                            height: 150,
-                            //color: Colors.green,
-                            //padding: EdgeInsets.all(100),
-                            child: Image.asset("images/tileImages/9.png")),
+                        Material(
+                          // profile picture, background and shadow
+                          borderRadius: BorderRadius.circular(180),
+                          elevation: 5,
+                          child: const CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 80,
+                            child: CircleAvatar(
+                              radius: 75,
+                              backgroundImage:
+                                  AssetImage("images/9.png"), //** USER IMAGE
+                            ),
+                          ),
+                        ),
 
                         //Space between image and first text field
                         SizedBox(
