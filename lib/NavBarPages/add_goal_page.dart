@@ -112,6 +112,32 @@ class _addGoalState extends State<addGoal> {
       body: Container(
         child: Stack(
           children: [
+
+
+            //start of blob creation and placement
+            Positioned(
+              bottom: 470,
+              left: 150,
+              child: Image(
+                image: AssetImage('images/Blobs/Asset 38 4.png'),
+              ),
+            ),
+            Positioned(
+              bottom: 170,
+              right: 145,
+              child: Image(
+                image: AssetImage('images/Blobs/Asset 38 3.png'),
+              ),
+            ),
+            Positioned(
+              top: 425,
+              left: -70,
+              child: Image(
+                image: AssetImage('images/Blobs/Asset 38 2.png'),
+              ),
+            ),
+            //end of blob creation and placement
+
             Padding(
               padding: const EdgeInsets.only(top: 70.0),
               child: SafeArea(
@@ -122,6 +148,7 @@ class _addGoalState extends State<addGoal> {
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.w300)),
+
                   /*child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

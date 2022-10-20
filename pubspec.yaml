@@ -67,7 +67,9 @@ flutter:
     - images/tileImages/present.svg
     - images/tileImages/digitalDrawing.svg
     - images/tileImages/newMedium.svg
-
+    - images/Blobs/Asset 38 2.png
+    - images/Blobs/Asset 38 3.png
+    - images/Blobs/Asset 38 4.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -5,6 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
+//Found out how to do gradient on this site
+//https://www.woolha.com/tutorials/flutter-using-radialgradient-examples#:~:
+//text=In%20Flutter%27s%20RadialGradient%2C%200%20means%20the%20center%
+//20of,used%20to%20set%20where%20the%20second%20fraction%20stops.
 class SignupPage extends StatefulWidget {
   final VoidCallback showLoginPage;
   const SignupPage({Key? key, required this.showLoginPage}) : super(key: key);
@@ -232,8 +236,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 //##### Main Window #####
                 child: SingleChildScrollView(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(mainAxisAlignment: MainAxisAlignment.center,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         //Spacing above Greeting text
@@ -271,8 +274,7 @@ class _SignupPageState extends State<SignupPage> {
                             height: 150,
                             //color: Colors.green,
                             //padding: EdgeInsets.all(100),
-                            child:
-                                Image.asset("images/Goalero Logo No BG.png")),
+                            child: Image.asset("images/tileImages/9.png")),
 
                         //Space between image and first text field
                         SizedBox(
@@ -510,9 +512,11 @@ class _SignupPageState extends State<SignupPage> {
                             child: Container(
                               padding: EdgeInsets.all(15),
                               decoration: BoxDecoration(
-                                  color: Color(0xFF3f826d),
+                                  color: Color.fromARGB(255, 126, 50, 212),
                                   borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(color: Color(0xFF3f826d))),
+                                  border: Border.all(
+                                      color:
+                                          Color.fromARGB(255, 126, 50, 212))),
                               child: Center(
                                 child: Text(
                                   "Sign Up",
