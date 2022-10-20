@@ -5,7 +5,7 @@ class Goal {
   final String goalName;
   final String goalCategory;
   final String goalDesctiption;
-  final Timestamp goalCompletionDate;
+  final String goalCompletionDate;
 
   Goal(
       {required this.goalName,

@@ -26,7 +26,6 @@ class _addGoalState extends State<addGoal> {
 
   /*
   addNewGoal
-
   Communicated to the firestore database to store the goal information inside of
   a collection created within the user's document.
   */
@@ -113,6 +112,8 @@ class _addGoalState extends State<addGoal> {
       body: Container(
         child: Stack(
           children: [
+
+
             //start of blob creation and placement
             Positioned(
               bottom: 470,
@@ -136,6 +137,7 @@ class _addGoalState extends State<addGoal> {
               ),
             ),
             //end of blob creation and placement
+
             Padding(
               padding: const EdgeInsets.only(top: 70.0),
               child: SafeArea(

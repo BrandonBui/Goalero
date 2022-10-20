@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:goalero/Authentication%20Pages/main_page2.dart';
+import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_5.dart';
 import 'package:goalero/NavBarPages/add_goal_page.dart';
 import 'package:goalero/NavBarPages/chat_page.dart';
 import 'package:goalero/NavBarPages/trending_goals.dart';
@@ -10,6 +11,7 @@ import 'package:goalero/NavBarPages/user_profile_page.dart';
 import 'package:goalero/Authentication Pages/main_page.dart';
 import 'package:goalero/User%20Information/app_user.dart';
 import 'package:goalero/User%20Information/goal.dart';
+import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_1.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'Authentication Pages/login_page.dart';
@@ -144,13 +146,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             return StreamBuilder<List<Goal>>(
                 stream: getGoals(),
                 builder: (context, snapshot) {
+                  late final List<Goal> goalList;
                   if (snapshot.hasError) {
-                    return Center(
+                    goalList = [];
+                    /*return Center(
+                      
                         child: const Text(
                             'Something went wrong! Error: getGoals'));
+                            */
                   }
                   if (snapshot.hasData) {
-                    final goalList = snapshot.data!;
+                    goalList = snapshot.data!;
 
                     return Scaffold(
                       floatingActionButton: RotationTransition(
@@ -166,11 +172,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             ),
                             onPressed: () {
                               setState(() {
-                                 _currentIndex = 2;
-                                 _pageController.animateToPage(_currentIndex,
-                                      duration:
-                                          const Duration(milliseconds: 250),
-                                      curve: Curves.easeIn);
+                                _currentIndex = 2;
+                                _pageController.animateToPage(_currentIndex,
+                                    duration: const Duration(milliseconds: 250),
+                                    curve: Curves.easeIn);
                               });
                             },
                             tooltip: "Add Goal",
