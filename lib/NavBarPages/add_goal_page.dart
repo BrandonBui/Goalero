@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../PreMade Goals Pages/academic.dart';
-import '../customAddGoal.dart';
+import '../customGoalPages/customAddGoal.dart';
 
 class addGoal extends StatefulWidget {
   final AppUser curUser;
@@ -157,8 +157,7 @@ class _addGoalState extends State<addGoal> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                customAddGoal(widget.curUser)),
+                            builder: (context) => customAddGoalLanding()),
                       );
                     },
                   ),
