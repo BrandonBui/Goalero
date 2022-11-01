@@ -1,14 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_4.dart';
+import 'package:goalero/User%20Information/app_user.dart';
 import 'package:intl/intl.dart';
 
 class GoalPageThree extends StatefulWidget {
+  final String goalCategory;
   final String currentGoal;
+  final String goalDescription;
+  final AppUser curUser;
   const GoalPageThree({
+    required this.goalCategory,
     required this.currentGoal,
+    required this.goalDescription,
     Key? key,
+    required this.curUser,
   }) : super(key: key);
 
   @override
@@ -112,7 +118,6 @@ class _GoalPageThreeState extends State<GoalPageThree> {
                           style: TextStyle(fontSize: 40),
                           textAlign: TextAlign.center,
                           enabled: false,
-                          keyboardType: TextInputType.text,
                           onSaved: (String? val) {
                             _setDate = val!;
                           },
@@ -131,7 +136,13 @@ class _GoalPageThreeState extends State<GoalPageThree> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return GoalPageFour();
+                        return GoalPageFour(
+                          goalCategory: widget.goalCategory,
+                          currentGoal: widget.currentGoal,
+                          goalDescription: widget.goalDescription,
+                          goalDueDate: dateController.text,
+                          curUser: widget.curUser,
+                        );
                       }));
                     },
                     child: Container(

@@ -181,25 +181,29 @@ class _addGoalState extends State<addGoal> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => fitness(),
+                                    builder: (context) =>
+                                        fitness(curUser: widget.curUser),
                                   ));
                             } else if (index == 1) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => cooking(),
+                                    builder: (context) =>
+                                        cooking(curUser: widget.curUser),
                                   ));
                             } else if (index == 2) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => art(),
+                                    builder: (context) =>
+                                        art(curUser: widget.curUser),
                                   ));
                             } else if (index == 3) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => academic(),
+                                    builder: (context) =>
+                                        academic(curUser: widget.curUser),
                                   ));
                             }
                           },

@@ -3,12 +3,21 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_5.dart';
 import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_3.dart';
+import 'package:goalero/User%20Information/app_user.dart';
 
 class GoalPageFourYes extends StatefulWidget {
+  final String goalCategory;
   final String currentGoal;
-  final String goalCount;
+  final String goalDescription;
+  final String goalDueDate;
+  final AppUser curUser;
   const GoalPageFourYes(
-      {required this.currentGoal, required this.goalCount, super.key});
+      {required this.currentGoal,
+      required this.goalCategory,
+      required this.goalDescription,
+      required this.goalDueDate,
+      required this.curUser,
+      super.key});
 
   @override
   State<GoalPageFourYes> createState() => _GoalPageFourYesState();
@@ -59,7 +68,12 @@ class _GoalPageFourYesState extends State<GoalPageFourYes> {
                               MaterialPageRoute(builder: (context) {
                             //Change this to return the final question page
                             return GoalPageFive(
-                                finalGoal: 'test', actionWord: 'test');
+                              goalCategory: widget.goalCategory,
+                              currentGoal: widget.currentGoal,
+                              goalDescription: widget.goalDescription,
+                              goalDueDate: widget.goalDueDate,
+                              curUser: widget.curUser,
+                            );
                           }));
                         },
                         child: Container(

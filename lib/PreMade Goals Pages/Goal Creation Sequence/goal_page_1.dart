@@ -1,16 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_3.dart';
 import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_2_long_term.dart';
 import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_2_recurring.dart';
+import 'package:goalero/User%20Information/app_user.dart';
 
 class GoalPageOne extends StatefulWidget {
   final String currentGoal;
   final String goalCategory;
+  final AppUser curUser;
   const GoalPageOne(
-      {required this.currentGoal, required this.goalCategory, super.key});
+      {required this.currentGoal,
+      required this.goalCategory,
+      super.key,
+      required this.curUser});
 
   @override
   State<GoalPageOne> createState() => _GoalPageOneState();
@@ -85,7 +87,11 @@ class _GoalPageOneState extends State<GoalPageOne> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return GoalPageTwoLongTerm();
+                          return GoalPageTwoLongTerm(
+                            currentGoal: widget.currentGoal,
+                            goalCategory: widget.goalCategory,
+                            curUser: widget.curUser,
+                          );
                         }));
                       },
                       child: Container(
@@ -126,7 +132,10 @@ class _GoalPageOneState extends State<GoalPageOne> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return GoalPageThree(
+                            goalCategory: widget.goalCategory,
                             currentGoal: widget.currentGoal,
+                            goalDescription: "Just need to complete this goal!",
+                            curUser: widget.curUser,
                           );
                         }));
                       },
@@ -206,7 +215,11 @@ class _GoalPageOneState extends State<GoalPageOne> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return GoalPageTwoRecurring();
+                          return GoalPageTwoRecurring(
+                            currentGoal: widget.currentGoal,
+                            goalCategory: widget.goalCategory,
+                            curUser: widget.curUser,
+                          );
                         }));
                       },
                       child: Container(

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_1.dart';
+import 'package:goalero/User%20Information/app_user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 class fitness extends StatelessWidget {
-  fitness({super.key});
+  final AppUser curUser;
+  fitness({super.key, required this.curUser});
 
   List<Color> diffcolors = [
     Color(0xFF95D9FF),
@@ -161,7 +162,8 @@ class fitness extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (context) => GoalPageOne(
                                           currentGoal: premadeGoals[0],
-                                          goalCategory: "Fitness"),
+                                          goalCategory: "Fitness",
+                                          curUser: curUser),
                                     ));
                               } else if (index == 1) {
                                 Navigator.push(
@@ -169,7 +171,8 @@ class fitness extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (context) => GoalPageOne(
                                           currentGoal: premadeGoals[1],
-                                          goalCategory: "Fitness"),
+                                          goalCategory: "Fitness",
+                                          curUser: curUser),
                                     ));
                               } else if (index == 2) {
                                 Navigator.push(
@@ -177,7 +180,8 @@ class fitness extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (context) => GoalPageOne(
                                           currentGoal: premadeGoals[2],
-                                          goalCategory: "Fitness"),
+                                          goalCategory: "Fitness",
+                                          curUser: curUser),
                                     ));
                               } else if (index == 3) {
                                 Navigator.push(
@@ -185,7 +189,8 @@ class fitness extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (context) => GoalPageOne(
                                           currentGoal: premadeGoals[3],
-                                          goalCategory: "Fitness"),
+                                          goalCategory: "Fitness",
+                                          curUser: curUser),
                                     ));
                               } else if (index == 4) {
                                 Navigator.push(
@@ -193,7 +198,8 @@ class fitness extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (context) => GoalPageOne(
                                           currentGoal: premadeGoals[4],
-                                          goalCategory: "Fitness"),
+                                          goalCategory: "Fitness",
+                                          curUser: curUser),
                                     ));
                               }
                             },

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_1.dart';
+import 'package:goalero/User%20Information/app_user.dart';
 
 class GoalPageFourNo extends StatefulWidget {
-  final String goalCount;
-  const GoalPageFourNo({required this.goalCount, super.key});
+  final String goalCategory;
+  final String currentGoal;
+  final AppUser curUser;
+  const GoalPageFourNo({
+    super.key,
+    required this.curUser,
+    required this.goalCategory,
+    required this.currentGoal,
+  });
 
   @override
   State<GoalPageFourNo> createState() => _GoalPageFourNoState();
@@ -55,8 +61,9 @@ class _GoalPageFourNoState extends State<GoalPageFourNo> {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return GoalPageOne(
-                              currentGoal: "Lose weight",
-                              goalCategory: "Test",
+                              currentGoal: widget.currentGoal,
+                              goalCategory: widget.goalCategory,
+                              curUser: widget.curUser,
                             );
                           }));
                         },

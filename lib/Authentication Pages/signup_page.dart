@@ -497,7 +497,6 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           child: GestureDetector(
                             onTap: () {
-                              debugPrint("Sign up Clicked");
                               final isValidForm =
                                   formKey.currentState!.validate();
 

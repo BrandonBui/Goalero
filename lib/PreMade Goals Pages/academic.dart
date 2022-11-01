@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:goalero/PreMade%20Goals%20Pages/Goal%20Creation%20Sequence/goal_page_1.dart';
+import 'package:goalero/User%20Information/app_user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scaffold_gradient_background/scaffold_gradient_background.dart';
 
 class academic extends StatelessWidget {
-  academic({super.key});
+  final AppUser curUser;
+  academic({required this.curUser, super.key});
 
   List<Color> diffcolors = [
     Color(0xFF95D9FF),
@@ -152,8 +154,10 @@ class academic extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => GoalPageOne(
-                                      currentGoal: premadeGoals[0],
-                                      goalCategory: "Academic"),
+                                    currentGoal: premadeGoals[0],
+                                    goalCategory: "Academic",
+                                    curUser: curUser,
+                                  ),
                                 ));
                           } else if (index == 1) {
                             Navigator.push(
@@ -161,7 +165,8 @@ class academic extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => GoalPageOne(
                                       currentGoal: premadeGoals[1],
-                                      goalCategory: "Academic"),
+                                      goalCategory: "Academic",
+                                      curUser: curUser),
                                 ));
                           } else if (index == 2) {
                             Navigator.push(
@@ -169,15 +174,18 @@ class academic extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => GoalPageOne(
                                       currentGoal: premadeGoals[2],
-                                      goalCategory: "Academic"),
+                                      goalCategory: "Academic",
+                                      curUser: curUser),
                                 ));
                           } else if (index == 3) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => GoalPageOne(
-                                      currentGoal: premadeGoals[3],
-                                      goalCategory: "Academic"),
+                                    currentGoal: premadeGoals[3],
+                                    goalCategory: "Academic",
+                                    curUser: curUser,
+                                  ),
                                 ));
                           }
                         },
