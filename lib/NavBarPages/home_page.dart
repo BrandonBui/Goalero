@@ -21,10 +21,8 @@ class _homeState extends State<home> {
       return 0; //morning
     } else if (hour < 18) {
       return 1; //afternoon
-    } else if (hour < 21) {
-      return 2; //evening
     } else {
-      return 3; //night
+      return 2; //evening
     }
   }
 
